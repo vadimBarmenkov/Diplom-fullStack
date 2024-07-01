@@ -46,7 +46,7 @@ export class HotelsRoomController {
 
     @Put(':id')
     update(@Body() data: UpdateHotelRoomDto, @Param('id') id: ObjectId) {
-        this.hotelRoomsService.update(id, data);
+        console.log('update', id);
+        return this.hotelRoomsService.update(id, data);
     }
-
 }

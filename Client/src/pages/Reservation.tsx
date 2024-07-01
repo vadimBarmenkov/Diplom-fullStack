@@ -1,6 +1,8 @@
-import {Card, CardBody, Chip, IconButton, Tooltip, Typography} from '@material-tailwind/react';
+import {Button, Card, CardBody, Chip, IconButton, Tooltip, Typography} from '@material-tailwind/react';
 import {FC, useEffect, useState} from 'react'
 import {ResevationService} from '../services/reservation.service';
+import {HotelService} from "../services/hotel.service";
+import {useNavigate} from "react-router-dom";
 
 interface IReservation {
     _id: string;
@@ -16,11 +18,17 @@ export const Reservation: FC = () => {
 
     const TABLE_HEAD = ["ID", "Дата начала:", "Дата окончания:", "Отель", ""];
     const [tableRows, setTableRows] = useState<IReservation[]>([]);
+    const navigate = useNavigate();
 
 
     async function fetchReservation() {
         const data = await ResevationService.getUserReservations();
         setTableRows(data);
+    }
+
+    async function getHotelName(hotelId: string) : Promise<string>{
+        const data = await HotelService.getHotelById(hotelId);
+        return data.title;
     }
 
     async function removeReserv(reservId: string) {
@@ -56,14 +64,15 @@ export const Reservation: FC = () => {
                     </thead>
                     <tbody>
                     {tableRows.map(
-                        ({_id, hotelId, dateStart, dateEnd}, index) => {
+                         ({_id, hotelId, dateStart, dateEnd}, index) => {
                             const isLast = index === tableRows.length - 1;
+                            const hotelName = getHotelName(hotelId);
                             const classes = isLast
                                 ? "p-4"
                                 : "p-4 border-b border-blue-gray-50";
 
                             return (
-                                <tr key={_id}>
+                                <tr key={index}>
                                     <td className={classes}>
                                         <div className="flex items-center gap-3">
                                             <div className="flex flex-col">
@@ -99,12 +108,14 @@ export const Reservation: FC = () => {
                                     </td>
                                     <td className={classes}>
                                         <div className="w-max">
-                                            <Chip
-                                                variant="ghost"
+                                            <Button
+                                                onClick={() => navigate(`/hotels/${hotelId}`)}
+                                                variant="text"
                                                 size="sm"
-                                                value={hotelId}
                                                 color={"blue-gray"}
-                                            />
+                                            >
+                                                Перейти к отелю
+                                            </Button>
                                         </div>
                                     </td>
                                     <td className={classes}>

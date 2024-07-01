@@ -11,9 +11,12 @@ export const HotelRoomService = {
         const {data} = await instance.get(`hotel-rooms/${id}`);
         return data;
     },
-    async getHotelRooms(hotelId: string | undefined): Promise<any[]> {
+    async getHotelRooms(hotelId: string | undefined): Promise<any> {
         const {data} = await instance.get(`hotel-rooms/hotels/${hotelId}`);
         return data;
+    },
+    async update(id: string | undefined, hotelRoomData: IHotelRoomData) {
+        const {data} = await instance.put<any>(`hotel-rooms/${id}`, hotelRoomData);
+        return data;
     }
-
 }

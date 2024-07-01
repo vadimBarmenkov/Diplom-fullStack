@@ -36,7 +36,7 @@ export const HotelCard: FC<IHotelCard> = ({images, title, description, _id}) => 
                     {title}
                 </Typography>
                 <Typography color="gray" className="mb-2 font-normal">
-                    {description.slice(0, 235)}
+                    {description.slice(0, 200)}
                 </Typography>
                 <Button
                     onClick={() => navigate(`/hotels/${_id}`)}

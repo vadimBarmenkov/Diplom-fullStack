@@ -12,6 +12,7 @@ import {Reservation} from "../pages/Reservation";
 import {EditHotel} from "../pages/EditHotel";
 import {ProtectedWithAdmin} from "./ProtectedWithAdmin";
 import {ProtectedWithClient} from "./ProtectedWhithClient";
+import EditHotelRoom from "../pages/EditHotelRoom.tsx";
 
 export const router = createBrowserRouter([
     {
@@ -41,6 +42,12 @@ export const router = createBrowserRouter([
                 path: 'hotels/:id/create-hotel-room',
                 element: <ProtectedWithAdmin>
                     <CreateHotelRoom/>
+                </ProtectedWithAdmin>
+            },
+            {
+                path: 'hotels/:id/edit-hotel-room',
+                element: <ProtectedWithAdmin>
+                    <EditHotelRoom/>
                 </ProtectedWithAdmin>
             },
             {

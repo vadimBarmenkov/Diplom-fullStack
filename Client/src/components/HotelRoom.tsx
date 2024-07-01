@@ -57,7 +57,7 @@ export const HotelRoom: FC<IHotelRoom> = ({title, description, images, hotelId, 
             {isAdmin ? (
                     <div className="flex items-center justify-end gap-x-1">
                         <Button
-                            onClick={() => {
+                            onClick={() => { navigate('edit-hotel-room', {state: {roomId: _id}})
                             }}
                             variant="text"
                             size="sm"

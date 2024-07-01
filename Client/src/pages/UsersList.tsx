@@ -184,7 +184,7 @@ export const UsersList: FC = () => {
                 </CardBody>
             </Card>
             <Dialog open={open} handler={handleOpen}>
-                <DialogHeader>Укажите дату начала и окончания бронирования</DialogHeader>
+                <DialogHeader>Новый пользователь:</DialogHeader>
                 <DialogBody>
                     <div
                         className="flex w-1/3 flex-col mx-auto gap-5">
